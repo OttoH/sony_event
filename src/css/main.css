@@ -1,0 +1,198 @@
+html, body{
+  height: 100%;
+}
+.main{
+  height: 100%;
+}
+.logo{
+  margin: auto;
+  width: 60%;
+  padding-top: 175px;
+  font-size: 38px;
+  background-image: url("../img/sonylogo.png");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.welcomeText{
+  color: white;
+  text-align: center;
+  margin: 20px;
+}
+.loginblock{
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+.logininput{
+  color: #999;
+  margin: 15px;
+  width: 250px;
+  padding: 3px;
+}
+.blackbutton{
+  margin: 15px;
+  width:250px;
+  padding: 12px;
+  color: white;
+  background-color: black;
+  border-width: 0px;
+}
+.overlay {
+    width:100%;
+    height:100%;
+    position:absolute;
+    background-color:#000;
+    opacity:0.5;
+}
+.loginPage{
+  margin: auto;
+  width:100%;
+  height:100%;
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.3)
+  ), url("../img/background.png");
+  url("../img/background.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-color: #000;
+}
+.contentPage{
+  display: none;
+  margin: auto;
+  width:100%;
+  height:100%;
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.3)
+  ), url("../img/background_q.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-color: #000;
+}
+
+.questionblock{
+  color: white;
+  margin: auto;
+  padding-top: 30px;
+  padding-left: 20px;
+  padding-right: 20px;
+  width: 80%;
+  height: 90%;
+}
+.questionTitles{
+  font-size: 22px;
+  margin-bottom: 5px;
+}
+
+.hinttext{
+  font-size: 14px;
+  margin: auto;
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  color: red;
+  height: 30px;
+}
+
+.ItalicFont{
+  font-style:italic;
+}
+.selectionblock{
+  margin: 20px;
+}
+.qOptions{
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-left: 0px;
+  border-right: 0px;
+  border-top: 0px;
+  border-bottom: 1px solid white;
+  padding-bottom: 5px;
+  font-size: 20px;
+  height: 33%;
+  text-align: center;
+}
+
+.progressBar{
+  position: relative;
+  bottom:25px;
+  color: white;
+  margin:auto;
+  width: 80%;
+}
+.progressBarTitle{
+  position:absolute;
+  left: 0px;
+}
+.progressPercentage{
+  position: absolute;
+  right: 0px;
+}
+.barbackground{
+  background-color: white;
+  width: 100%;
+  margin-top: 5px;
+  height:20px;
+}
+.barPercentage{
+  position:relative;;
+  left:0px;
+  background-color: black;
+  width: 1%;
+  margin-top: 5px;
+  height:20px;
+}
+
+.exitPage{
+  display: none;
+  margin: auto;
+  width:100%;
+  height:100%;
+  background-image: url("../img/background_exit.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-color: #000;
+  text-align: center;
+}
+.exitText{
+  color: white;
+  padding-top: 80%;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+.exitTest{
+  margin-top: 30px;
+}
+
+
+
+@-webkit-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@-moz-keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+@keyframes fadeIn { from { opacity:0; opacity: 1\9; /* IE9 only */ } to { opacity:1; } }
+
+.fade-in {
+    opacity:0;  /* make things invisible upon start */
+    -webkit-animation:fadeIn ease-in 1;  /* call our keyframe named fadeIn, use animattion ease-in and repeat it only 1 time */
+    -moz-animation:fadeIn ease-in 1;
+    animation:fadeIn ease-in 1;
+
+    -webkit-animation-fill-mode:forwards;  /* this makes sure that after animation is done we remain at the last keyframe value (opacity: 1)*/
+    -moz-animation-fill-mode:forwards;
+    animation-fill-mode:forwards;
+
+    -webkit-animation-duration:0.3s;
+    -moz-animation-duration:0.3s;
+    animation-duration:0.3s;
+}
+
+.fade-in .slow {
+  -webkit-animation-duration:1s;
+  -moz-animation-duration:1s;
+  animation-duration:1s;
+}

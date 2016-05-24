@@ -37,34 +37,34 @@ router.use(express.static(path.resolve(__dirname, 'src')));
 var tcpClients = [];
 var clients = [];
 var tcpServer = net.createServer(function (c) {
-    console.log('--tcp connected--');
-    
-    tcpClients.push(c);
+	console.log('--tcp connected--');
+	
+	tcpClients.push(c);
 
-    c.on('data', function(buffer) {
-        var data = String(buffer);
+	c.on('data', function(buffer) {
+		var data = String(buffer);
 
-        if (data.substring(0, 14) == 'HELLO/LISTENER') {
-            console.log("Listener connected");
-        }
-    });
+		if (data.substring(0, 14) == 'HELLO/LISTENER') {
+			console.log("Listener connected");
+		}
+	});
 
-    c.on('end', function() {
-        console.log('client disconnected');
-        
-        var index = tcpClients.indexOf(c);
-        tcpClients.splice(index, 1);
-    });
+	c.on('end', function() {
+		console.log('client disconnected');
+		
+		var index = tcpClients.indexOf(c);
+		tcpClients.splice(index, 1);
+	});
 
-    c.on('error', function(e) {
-        console.log('client error, disconnect', e);
-        
-        var index = tcpClients.indexOf(c);
-        tcpClients.splice(index, 1);
-    });
+	c.on('error', function(e) {
+		console.log('client error, disconnect', e);
+		
+		var index = tcpClients.indexOf(c);
+		tcpClients.splice(index, 1);
+	});
 });
 tcpServer.listen(7777, function() {
-    console.log('server bound');
+	console.log('server bound');
 });
 
 
@@ -79,126 +79,131 @@ var data = [];
 var sockets = [];
 io.on('connection', function(socket) {
 
-    sockets.push(socket);
+	sockets.push(socket);
 
-    socket.on('disconnect', function() {
-      sockets.splice(sockets.indexOf(socket), 1);
-      updateRoster();
-    });
-    
-    socket.on('register', function(person) {
-        
-    });
-    
-    socket.on('pass', function(phone) {
-        
-    });
+	socket.on('disconnect', function() {
+	  sockets.splice(sockets.indexOf(socket), 1);
+	  updateRoster();
+	});
+	
+	socket.on('register', function(person) {
+		socket.emit('check_register', {
+		  isValid : true
+		});
+	});
+	
+	socket.on('pass', function(phone) {
+		socket.emit('confirm_pass', {
+			isValid: true
+		});
+		
+	});
 
-    socket.on('start', function() {
-      var data = {
-        type: 'start'  
-      }
-      
-      try {
-        var stringfyData = JSON.stringify(data);
-        console.log('stringfy stop output: ', stringfyData);
-        // broadcast('stop', JSON.stringify(data));
-        
-        if (tcpServer) {
-            tcpClients.forEach(function(c) {
-                c.write(stringfyData + '\n');
-            });
-        }
-      } catch (e) {
-        console.log(e); 
-      }
-    });
+	socket.on('start', function() {
+	  var data = {
+		type: 'start'  
+	  }
+	  
+	  try {
+		var stringfyData = JSON.stringify(data);
+		console.log('stringfy stop output: ', stringfyData);
+		// broadcast('stop', JSON.stringify(data));
+		
+		if (tcpServer) {
+			tcpClients.forEach(function(c) {
+				c.write(stringfyData + '\n');
+			});
+		}
+	  } catch (e) {
+		console.log(e); 
+	  }
+	});
 
-    socket.on('lottery', function(data) {
-      
-      persist.connect({
-          driver: 'sqlite3',
-          filename: __dirname + '/src/js/' + DB_CONFIG.filename,
-          trace: false
-          
-      }, function(err, connection) {
-          
-          Person.where('is_pass = ?', 1).all(connection, function(err, person) {
-              if (!err) {
-                  // console.log('person: ', person);
-                  
-                  var data = {
-                    type: 'lottery',
-                    event: person[0].id,
-                    name: person[0].name,
-                    phone: person[0].phone
-                  }
-                  
-                  try {
-                    var stringfyData = JSON.stringify(data);
-                    console.log('stringfy lottery output: ', stringfyData);
-                    // broadcast('lottery', JSON.stringify(data));
+	socket.on('lottery', function(data) {
+	  
+	  persist.connect({
+		  driver: 'sqlite3',
+		  filename: __dirname + '/src/js/' + DB_CONFIG.filename,
+		  trace: false
+		  
+	  }, function(err, connection) {
+		  
+		  Person.where('is_pass = ?', 1).all(connection, function(err, person) {
+			  if (!err) {
+				  // console.log('person: ', person);
+				  
+				  var data = {
+					type: 'lottery',
+					event: person[0].id,
+					name: person[0].name,
+					phone: person[0].phone
+				  }
+				  
+				  try {
+					var stringfyData = JSON.stringify(data);
+					console.log('stringfy lottery output: ', stringfyData);
+					// broadcast('lottery', JSON.stringify(data));
 
-                    if (tcpServer) {
-                        tcpClients.forEach(function(c) {
-                            c.write(stringfyData + '\n');
-                        });
-                    }
+					if (tcpServer) {
+						tcpClients.forEach(function(c) {
+							c.write(stringfyData + '\n');
+						});
+					}
 
-                  } catch (e) {
-                    console.log(e); 
-                  }
-                  
-              } else {
-                  console.log(err);    
-              }
-          });
-        
-          connection.close();
-      });
-    });
+				  } catch (e) {
+					console.log(e); 
+				  }
+				  
+			  } else {
+				  console.log(err);    
+			  }
+		  });
+		
+		  connection.close();
+	  });
+	});
 
-    socket.on('clean', function() {
-      
-    });  
-    
-    socket.on('stop', function() {
-      var data = {
-        type: 'stop'  
-      }
-      
-      try {
-        var stringfyData = JSON.stringify(data);
-        console.log('stringfy stop output: ', stringfyData);
-        // broadcast('stop', JSON.stringify(data));
-        
-        if (tcpServer) {
-            tcpClients.forEach(function(c) {
-                c.write(stringfyData + '\n');
-            });
-        }
-      } catch (e) {
-        console.log(e); 
-      }
-    });  
-      
+	socket.on('clean', function() {
+	  
+	});  
+	
+	socket.on('stop', function() {
+	  var data = {
+		type: 'stop'  
+	  }
+	  
+	  try {
+		var stringfyData = JSON.stringify(data);
+		console.log('stringfy stop output: ', stringfyData);
+		// broadcast('stop', JSON.stringify(data));
+		
+		if (tcpServer) {
+			tcpClients.forEach(function(c) {
+				c.write(stringfyData + '\n');
+			});
+		}
+	  } catch (e) {
+		console.log(e); 
+	  }
+	});  
+	  
   });
 
 function updateRoster() {
   async.map(
-    sockets,
-    function (socket, callback) {
-      socket.get('name', callback);
-    },
-    function (err, names) {
-      broadcast('roster', names);
-    }
+	sockets,
+	function (socket, callback) {
+	  socket.get('name', callback);
+	},
+	function (err, names) {
+	  broadcast('roster', names);
+	}
   );
 }
 
 function broadcast(event, data) {
   sockets.forEach(function (socket) {
-    socket.emit(event, data);
+	socket.emit(event, data);
   });
 }
 

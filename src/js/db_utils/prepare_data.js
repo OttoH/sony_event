@@ -14,7 +14,8 @@ persist.connect({
         data.push(new Person({
             name: 'admin',
             phone: '0900000000',
-            is_pass: 1
+            is_pass: 1,
+            is_award: 0
         }));
         
         connection.save(data, function(err) {

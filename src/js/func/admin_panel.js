@@ -1,7 +1,6 @@
 var socket = io.connect();
 var switchFlag = 0; // 0:stop 1:start 2:execute
 
-
 document.querySelector('#start_btn').addEventListener('click', function(e) {
     e.preventDefault();
     
