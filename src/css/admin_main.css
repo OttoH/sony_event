@@ -1,0 +1,221 @@
+:root {
+  font-family: "Helvetica neue light", "HelveticaNeueLt Std Thin", Helvetica, Lucida Grande, Arial, sans-serif;
+  font-size: 62.5%;
+}
+a {
+  text-decoration: none;
+  color: #777;
+}
+a:visited {
+  color: #777;
+}
+.hidden {
+  display: none;
+}
+.height-hidden {
+  max-height: 0;
+}
+.width-hidden {
+  max-width: 0px;
+}
+.small-font {
+  font-size: 1.2rem;
+  margin-left: 12px;
+}
+.fb {
+  display: inline-block;
+  background-image: url('../data/main/facebook_logo_round.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 45px;
+  height: 45px;
+  margin-left: 12px;
+}
+/*
+When setting the primary font stack, apply it to the Pure grid units along
+with `html`, `button`, `input`, `select`, and `textarea`. Pure Grids use
+specific font stacks to ensure the greatest OS/browser compatibility.
+*/
+html,
+button,
+input,
+select,
+textarea,
+.pure-g [class*="pure-u"] {
+  /* Set your content font stack here: */
+  /*font-family: Georgia, Times, "Times New Roman", serif;*/
+  font-family: "Helvetica neue light", "HelveticaNeueLt Std Thin", Helvetica, Lucida Grande, Arial, sans-serif;
+}
+.pure-menu li a:focus {
+  background: none;
+}
+.page-enter {
+  opacity: 0.01;
+  transition: opacity 0.8s ease-in;
+  -wbkit-transition: opacity 0.8s ease-in;
+  -moz-transition: opacity 0.8s ease-in;
+}
+.page-enter.page-enter-active {
+  opacity: 1;
+}
+.page-leave {
+  opacity: 1;
+  -webkit-transition: opacity 0.5s ease-in;
+  transition: opacity 0.5s ease-in;
+}
+.page-leave.page-leave-active {
+  opacity: 0.01;
+}
+.moveUp-enter {
+  transition-duration: .3s;
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transform: translate3d(0, 100%, 0);
+  z-index: 10000;
+  -webkit-transition-duration: .3s;
+  -webkit-transition-property: transform, opacity;
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transform: translate3d(0, 100%, 0);
+}
+.moveUp-enter.moveUp-enter-active {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+.moveUp-leave {
+  transition-duration: .3s;
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  -webkit-transition-duration: .3s;
+  -webkit-transition-property: transform, opacity;
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transition-duration: .3s;
+  -moz-transition-property: transform, opacity;
+  -moz-transition-timing-function: ease-out;
+  -moz-transform: translate3d(0, 0, 0);
+}
+.moveUp-leave.moveUp-leave-active {
+  transform: translate3d(0, -15%, 0);
+  -webkit-transform: translate3d(0, -15%, 0);
+  -moz-transform: translate3d(0, -15%, 0);
+  opacity: 0.3;
+}
+.moveLeft-enter {
+  transition-duration: .4s;
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transform: translate3d(60%, 0, 0);
+  z-index: 10000;
+  -webkit-transition-duration: .4s;
+  -webkit-transition-property: transform, opacity;
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transform: translate3d(60%, 0, 0);
+  -moz-transition-duration: .4s;
+  -moz-transition-property: transform, opacity;
+  -moz-transition-timing-function: ease-out;
+  -moz-transform: translate3d(60%, 0, 0);
+}
+.moveLeft-enter.moveLeft-enter-active {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+}
+.moveLeft-leave {
+  transition-duration: .3s;
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+  -webkit-transition-duration: .3s;
+  -webkit-transition-property: transform, opacity;
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transition-duration: .3s;
+  -moz-transition-property: transform, opacity;
+  -moz-transition-timing-function: ease-out;
+  -moz-transform: translate3d(0, 0, 0);
+}
+.moveLeft-leave.moveLeft-leave-active {
+  -webkit-transform: translate3d(-20%, 0, 0);
+  -moz-transform: translate3d(-20%, 0, 0);
+  transform: translate3d(-20%, 0, 0);
+  opacity: 0.01;
+}
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.main {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-content: center;
+  -webkit-align-content: center;
+  flex-direction: column;
+  -webkit-flex-direction: column;
+  height: calc(100vh);
+  background: url("../img/admin_bg.png") no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+.main .container {
+  flex: 1 1 fit-content;
+  -webkit-flex: 1 1 fit-content;
+  width: 80%;
+  transition: width 0.7s ease-out;
+  margin: auto;
+  text-align: center;
+}
+.main .container .logo {
+  display: block;
+  height: 25px;
+  width: 100%;
+  background: url(../img/sony_logo.png) no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 0 0 36px 0;
+}
+.main .container .info-set {
+  display: block;
+  max-height: 68px;
+  background-color: rgba(230, 230, 230, 0.3);
+  font-size: 1.8rem;
+  color: #3D3D3D;
+  text-align: center;
+  margin: 0 0 24px 0;
+}
+.main .container .control-set {
+  display: block;
+}
+.main .container .control-set ul {
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.main .container .control-set ul a {
+  display: block;
+  min-height: 46px;
+  font-size: 1.8rem;
+  color: #EFF8EE;
+  margin: 12px 0 0 0;
+  background-color: rgba(23, 23, 23, 0.3);
+  line-height: 3;
+}
+.main .container .control-set ul a:hover {
+  background-color: #EFF8EE;
+  color: #666;
+}

@@ -1,0 +1,72 @@
+@import "basic.less";
+
+.main{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    
+    align-content: center;
+    -webkit-align-content: center;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    
+    height: calc(100vh);
+    background: url("../img/admin_bg.png") no-repeat;
+    background-position: center;
+    background-size: cover;
+     
+    .container {
+        flex: 1 1 fit-content;
+        -webkit-flex: 1 1 fit-content;
+        width: 80%;
+        transition: width 0.7s ease-out;
+        margin: auto;
+        text-align: center;
+        
+            .logo {
+                display: block;
+                height: 25px;
+                width: 100%;
+                background: url(../img/sony_logo.png) no-repeat;
+                background-position: center;
+                background-size: contain;
+                margin: 0 0 36px 0;
+            }
+                
+            .info-set{
+                display: block;
+                max-height: 68px;
+                background-color: @overlay_bg_white;
+                font-size: @font_l;
+                color: @header_title;
+                text-align: center;
+                margin: 0 0 24px 0;
+            }
+            
+            .control-set {
+                display: block;
+                
+                ul {
+                    list-style: none;
+                    padding: 0px;
+                    margin: 0px;
+                        a {
+                            display: block;
+                            min-height: 46px;
+                            font-size: @font_l;
+                            color: @white;
+                            margin: 12px 0 0 0;
+                            background-color: @overlay_bg;
+                            line-height: 3;
+                            
+                            &:hover {
+                                background-color: @white;
+                                color: @header_content-bg;
+                        }
+                    }    
+                }
+            }
+        }
+    }

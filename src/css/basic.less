@@ -1,0 +1,235 @@
+@font_s: 1.2rem;
+@font_n: 1.6rem;
+@font_l: 1.8rem;
+@font_xl: 2.0rem;
+@font_xxl: 2.6rem;
+@font_page: 3.2rem;
+
+@header_title: #3D3D3D;
+@header_content: #777;
+@header_content-bg: #666;
+@sub-img-title-bg: #A2A2A2;
+@footer-bg: #D3CFCE;
+@white: #EFF8EE;
+@green: rgba(137, 185, 35, 1);
+@brown: rgba(166, 116, 105, 1);
+@overlay_bg: rgba(23, 23, 23, .3);
+@overlay_bg_none: rgba(23, 23, 23, 0);
+@overlay_bg_white: rgba(230, 230, 230, .3);
+
+
+:root {
+	font-family: "Helvetica neue light", "HelveticaNeueLt Std Thin", Helvetica, Lucida Grande, Arial, sans-serif;
+	font-size: 62.5%
+};
+
+a {
+	text-decoration: none;
+	color: @header_content;
+	
+	&:visited {
+		color: @header_content;
+	}
+}
+
+.hidden {
+	display: none;
+}
+
+.height-hidden {
+	max-height: 0;
+}
+
+.width-hidden {
+  max-width: 0px;
+}
+
+.small-font {
+  font-size: @font_s;
+  margin-left: 12px;
+}
+
+
+.fb {
+  display: inline-block;
+	background-image: url('../data/main/facebook_logo_round.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+	width: 45px;
+	height: 45px;
+	margin-left: 12px;
+}
+/*
+When setting the primary font stack, apply it to the Pure grid units along
+with `html`, `button`, `input`, `select`, and `textarea`. Pure Grids use
+specific font stacks to ensure the greatest OS/browser compatibility.
+*/
+
+html, button, input, select, textarea,
+.pure-g [class *= "pure-u"] {
+    /* Set your content font stack here: */
+    /*font-family: Georgia, Times, "Times New Roman", serif;*/
+    font-family: "Helvetica neue light", "HelveticaNeueLt Std Thin", Helvetica, Lucida Grande, Arial, sans-serif;
+}
+
+.pure-menu li a:focus {
+	background: none;
+}
+
+.logo (@width: 100%, @height: 46px, @pos: center) {
+	display: inline-block;
+	background-image: url('../data/main/silverspire-white.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: @pos;
+	width: @width;
+	height: @height;
+}
+
+
+.flex (@grow: 1, @shrink: 1, @basis: 100%) {
+  -webkit-flex: @grow @shrink @basis;
+	-ms-flex: @grow @shrink @basis;
+	-moz-flex: @grow @shrink @basis;
+	flex: @grow @shrink @basis;
+}
+
+.align-self(@arg: flex-start) {
+  -webkit-align-self: @arg;
+  -ms-align-self: @arg;
+  -moz-align-self: @arg;
+  align-self: @arg;
+}
+
+// page anim
+.page-enter {
+  opacity: 0.01;
+  transition: opacity .8s ease-in;
+  -wbkit-transition: opacity .8s ease-in;
+  -moz-transition: opacity .8s ease-in;
+}
+
+.page-enter.page-enter-active {
+  opacity: 1;
+}
+
+.page-leave {
+  opacity: 1;
+  -webkit-transition: opacity .5s ease-in;
+  transition: opacity .5s ease-in;
+}
+
+.page-leave.page-leave-active {
+  opacity: 0.01;
+}
+
+// move up
+.moveUp-enter {
+  transition-duration: .3s;
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transform: translate3d(0,100%,0);
+  z-index: 10000;
+
+  -webkit-transition-duration: .3s;
+  -webkit-transition-property: transform, opacity;
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transform: translate3d(0,100%,0);
+}
+
+.moveUp-enter.moveUp-enter-active {
+  transform: translate3d(0,0,0);
+  -webkit-transform: translate3d(0,0,0);
+}
+
+.moveUp-leave {
+  transition-duration: .3s;
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transform: translate3d(0,0,0);
+  opacity: 1;
+
+  -webkit-transition-duration: .3s;
+  -webkit-transition-property: transform, opacity;
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transform: translate3d(0,0,0);
+
+  -moz-transition-duration: .3s;
+  -moz-transition-property: transform, opacity;
+  -moz-transition-timing-function: ease-out;
+  -moz-transform: translate3d(0,0,0);
+}
+
+.moveUp-leave.moveUp-leave-active {
+  transform: translate3d(0,-15%,0);
+  -webkit-transform: translate3d(0,-15%,0);
+  -moz-transform: translate3d(0,-15%,0);
+  opacity: 0.3;
+}
+
+// move left
+// move up
+.moveLeft-enter {
+  transition-duration: .4s;
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transform: translate3d(60%, 0, 0);
+  z-index: 10000;
+
+  -webkit-transition-duration: .4s;
+  -webkit-transition-property: transform, opacity;
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transform: translate3d(60%, 0, 0);
+
+  -moz-transition-duration: .4s;
+  -moz-transition-property: transform, opacity;
+  -moz-transition-timing-function: ease-out;
+  -moz-transform: translate3d(60%, 0, 0);
+}
+
+.moveLeft-enter.moveLeft-enter-active {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+}
+
+.moveLeft-leave {
+  transition-duration: .3s;
+  transition-property: transform, opacity;
+  transition-timing-function: ease-out;
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+
+  -webkit-transition-duration: .3s;
+  -webkit-transition-property: transform, opacity;
+  -webkit-transition-timing-function: ease-out;
+  -webkit-transform: translate3d(0, 0, 0);
+
+  -moz-transition-duration: .3s;
+  -moz-transition-property: transform, opacity;
+  -moz-transition-timing-function: ease-out;
+  -moz-transform: translate3d(0, 0, 0);
+}
+
+.moveLeft-leave.moveLeft-leave-active {
+  -webkit-transform: translate3d(-20% , 0, 0);
+  -moz-transform: translate3d(-20% , 0, 0);
+  transform: translate3d(-20% , 0, 0);
+  opacity: 0.01;
+}
+
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
