@@ -94,6 +94,26 @@ io.on('connection', function(socket) {
         
     });
 
+    socket.on('start', function() {
+      var data = {
+        type: 'start'  
+      }
+      
+      try {
+        var stringfyData = JSON.stringify(data);
+        console.log('stringfy stop output: ', stringfyData);
+        // broadcast('stop', JSON.stringify(data));
+        
+        if (tcpServer) {
+            tcpClients.forEach(function(c) {
+                c.write(stringfyData + '\n');
+            });
+        }
+      } catch (e) {
+        console.log(e); 
+      }
+    });
+
     socket.on('lottery', function(data) {
       
       persist.connect({

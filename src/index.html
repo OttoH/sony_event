@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SONY 經銷商大會</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="description" content="normal">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!--link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.5.0/pure-min.css"-->
+        <link rel="stylesheet"href="https://cdn.jsdelivr.net/pure/0.6.0/pure-min.css">
+        <link rel="stylesheet" href="style/main.css">
+        <!--[if lte IE 8]>
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/pure/0.6.0/grids-responsive-old-ie-min.css">
+        <![endif]-->
+        <!--[if gt IE 8]><!-->
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/pure/0.6.0/grids-responsive-min.css">
+        <!--<![endif]-->
+    </head>
+    <body>
+      <div class="main fade-in">
+
+        <div class="loginPage fade-in">
+          <div class="logo"></div>
+          <div class="welcomeText">
+            恭喜您已完成 Xperia X 最新的功能體驗 <br>
+            請您填寫以下資料然後完成問卷 <br>
+            就有機會能在第二階段抽中大獎哦！
+          </div>
+          <div class="loginblock">
+            <input id="usename" class="logininput" value="姓名 Name">
+            <input id="userphoneNum" class="logininput" value="手機 Phone Number">
+            <button class="enterContent blackbutton">進入問卷</button>
+          </div>
+        </div>
+
+        <div class="contentPage fade-in">
+          <div class ="questionblock">
+            <div class="questionTitles  fade-in"></div>
+            <div class="hinttext fade-in"></div>
+            <div class="selectionblock  fade-in slow pure-g">
+            <button id="selection1" class="qOptions pure-u-1-1"></button>
+            <button id="selection2" class="qOptions pure-u-1-1"></button>
+            <button id="selection3" class="qOptions pure-u-1-1"></button>
+            </div>
+          </div>
+          <div class="progressBar">
+            <div class="progressBarTitle">總體問卷完成度</div>
+            <div class="progressPercentage">0%</div>
+            <br>
+            <div class="barbackground">
+            <div class="barPercentage"></div>
+            </div>
+          </div>
+          <div>
+        </div>
+    </div>
+    <div class="exitPage fade-in">
+      <div class="exitText">
+        <h1>Congratulation!</h1>
+        <br>
+        謝謝您的積極參與 祝您在第二階段能獲得大獎哦！
+      </div>
+      <button class="exitTest blackbutton">離開</button>
+    </div>
+
+    </body>
+    <script src="js/zepto.min.js"></script>
+    <script src="js/main.js"></script>
+</html>
+

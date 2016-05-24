@@ -209,6 +209,7 @@ textarea,
 .main .container .control-set ul a {
   display: block;
   min-height: 46px;
+  border-radius: 6px;
   font-size: 1.8rem;
   color: #EFF8EE;
   margin: 12px 0 0 0;
