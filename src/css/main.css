@@ -53,7 +53,6 @@ html, body{
     rgba(0, 0, 0, 0.3),
     rgba(0, 0, 0, 0.3)
   ), url("../img/background.png");
-  url("../img/background.png");
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -94,6 +93,12 @@ html, body{
   margin: auto;
   position: absolute;
   width: 80%;
+  text-align: center;
+  color: red;
+  height: 30px;
+}
+
+.hinttext-login{
   text-align: center;
   color: red;
   height: 30px;
@@ -140,7 +145,7 @@ html, body{
   height:20px;
 }
 .barPercentage{
-  position:relative;;
+  position:relative;
   left:0px;
   background-color: black;
   width: 1%;

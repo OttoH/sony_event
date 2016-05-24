@@ -27,8 +27,9 @@
             就有機會能在第二階段抽中大獎哦！
           </div>
           <div class="loginblock">
-            <input id="usename" class="logininput" value="姓名 Name">
-            <input id="userphoneNum" class="logininput" value="手機 Phone Number">
+            <div class="hinttext-login fade-in"></div>
+            <input id="username" class="logininput" placeHolder="姓名">
+            <input id="userphoneNum" class="logininput" placeHolder="手機">
             <button class="enterContent blackbutton">進入問卷</button>
           </div>
         </div>
@@ -64,6 +65,7 @@
     </div>
 
     </body>
+    <script src="/socket.io/socket.io.js"></script>
     <script src="js/lib/zepto.min.js"></script>
     <script src="js/func/main.js"></script>
 </html>
