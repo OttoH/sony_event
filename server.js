@@ -87,17 +87,57 @@ io.on('connection', function(socket) {
 	});
 	
 	socket.on('register', function(person) {
-		socket.emit('check_register', {
-		  isValid : true
-		});
+	    persist.connect({
+		    driver: 'sqlite3',
+		    filename: __dirname + '/src/js/' + DB_CONFIG.filename,
+		    trace: false
+		  
+	    }, function(err, connection) {
+            Person.where('phone = ? and is_pass = ?', [person.phone, 1]).all(connection, function(err, people) {
+                var isValid = true;
+
+                if (people.length > 0) {
+                    isValid = false;    
+                }
+	    	    socket.emit('check_register', {
+		            isValid : isValid
+		        });
+            });
+        });
 	});
 	
-	socket.on('pass', function(phone) {
-		socket.emit('confirm_pass', {
-			isValid: true
-		});
-		
-	});
+	socket.on('pass', function(person) {
+
+        var passPerson = [
+            new Person({
+                name: person.name,
+                phone: person.phone,
+                is_pass: 1,
+                is_award: 0
+            })
+        ];
+
+        // console.log('person' + person.name);
+        // console.log('passPerson' + passPerson);
+	    persist.connect({
+		    driver: 'sqlite3',
+		    filename: __dirname + '/src/js/' + DB_CONFIG.filename,
+		    trace: false
+		  
+	    }, function(err, connection) {
+            connection.save(passPerson, function(err) {
+                if (err) {
+                    console.log('save pass', err);
+                } else {
+		            socket.emit('confirm_pass', {
+			            isValid: true
+		            });
+                }
+            });
+
+            connection.close();
+	    });
+    });
 
 	socket.on('start', function() {
 	  var data = {
@@ -128,15 +168,16 @@ io.on('connection', function(socket) {
 		  
 	  }, function(err, connection) {
 		  
-		  Person.where('is_pass = ?', 1).all(connection, function(err, person) {
-			  if (!err) {
+		  Person.where('name != ? and is_pass = ? and is_award = ?', ['admin', 1, 0]).all(connection, function(err, person) {
+			  if (!err && person && person.length > 0) {
 				  // console.log('person: ', person);
+                  var random = Math.floor(Math.random() * person.length) + 0;
 				  
 				  var data = {
 					type: 'lottery',
-					event: person[0].id,
-					name: person[0].name,
-					phone: person[0].phone
+					event: person[random].id,
+					name: person[random].name,
+					phone: person[random].phone
 				  }
 				  
 				  try {
@@ -153,6 +194,15 @@ io.on('connection', function(socket) {
 				  } catch (e) {
 					console.log(e); 
 				  }
+
+                  // upate award status
+                  person[random].update(connection, {is_award: 1}, function(err) {
+                    if (!err) {
+                        console.log('save ' + person[random].name + ' status');
+                    } else {
+                        console.log('save ' + person[random].name + ' status error!');
+                    }
+                  });
 				  
 			  } else {
 				  console.log(err);    
