@@ -1,6 +1,7 @@
 
 var http = require('http');
 var path = require('path');
+var net = require('net');
 
 var async = require('async');
 var socketio = require('socket.io');
@@ -21,7 +22,6 @@ var DB_CONFIG = {
 };
 
 // DB Configuration
-
 persist.setDefaultConnectOptions(DB_CONFIG);
 
 //check if DB exists and create new one if it doesn't
@@ -32,8 +32,40 @@ if (!fs.existsSync(DB_CONFIG.filename)) {
 router.get('/');
 
 router.use(express.static(path.resolve(__dirname, 'src')));
-var data = [];
-var sockets = [];
+
+// tcp server
+var tcpClients = [];
+var clients = [];
+var tcpServer = net.createServer(function (c) {
+    console.log('--tcp connected--');
+    
+    tcpClients.push(c);
+
+    c.on('data', function(buffer) {
+        var data = String(buffer);
+
+        if (data.substring(0, 14) == 'HELLO/LISTENER') {
+            console.log("Listener connected");
+        }
+    });
+
+    c.on('end', function() {
+        console.log('client disconnected');
+        
+        var index = tcpClients.indexOf(c);
+        tcpClients.splice(index, 1);
+    });
+
+    c.on('error', function(e) {
+        console.log('client error, disconnect', e);
+        
+        var index = tcpClients.indexOf(c);
+        tcpClients.splice(index, 1);
+    });
+});
+tcpServer.listen(7777, function() {
+    console.log('server bound');
+});
 
 
   /*
@@ -42,7 +74,9 @@ var sockets = [];
   "name": "黃政豪",
   "phone": "090000000"
   */
-
+// io setting
+var data = [];
+var sockets = [];
 io.on('connection', function(socket) {
 
     sockets.push(socket);
@@ -81,8 +115,16 @@ io.on('connection', function(socket) {
                   }
                   
                   try {
-                    console.log('stringfy: ', data);
-                    broadcast('lottery', JSON.stringify(data));
+                    var stringfyData = JSON.stringify(data);
+                    console.log('stringfy lottery output: ', stringfyData);
+                    // broadcast('lottery', JSON.stringify(data));
+
+                    if (tcpServer) {
+                        tcpClients.forEach(function(c) {
+                            c.write(stringfyData + '\n');
+                        });
+                    }
+
                   } catch (e) {
                     console.log(e); 
                   }
@@ -106,8 +148,15 @@ io.on('connection', function(socket) {
       }
       
       try {
-        console.log('stringfy: ', data);
-        broadcast('stop', JSON.stringify(data));
+        var stringfyData = JSON.stringify(data);
+        console.log('stringfy stop output: ', stringfyData);
+        // broadcast('stop', JSON.stringify(data));
+        
+        if (tcpServer) {
+            tcpClients.forEach(function(c) {
+                c.write(stringfyData + '\n');
+            });
+        }
       } catch (e) {
         console.log(e); 
       }
@@ -133,7 +182,7 @@ function broadcast(event, data) {
   });
 }
 
-server.listen(process.env.PORT || 3000, process.env.IP || "0.0.0.0", function(){
+server.listen(7776, function(){
   var addr = server.address();
   console.log("server listening at", addr.address + ":" + addr.port);
 });

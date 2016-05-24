@@ -219,3 +219,7 @@ textarea,
   background-color: #EFF8EE;
   color: #666;
 }
+.main .container .control-set ul a:active {
+  background-color: #EFF8EE;
+  color: #666;
+}
