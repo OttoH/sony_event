@@ -191,12 +191,21 @@ textarea,
 }
 .main .container .info-set {
   display: block;
-  max-height: 68px;
   background-color: rgba(230, 230, 230, 0.3);
   font-size: 1.8rem;
   color: #3D3D3D;
   text-align: center;
   margin: 0 0 24px 0;
+}
+.main .container .info-set .award-section {
+  color: rgba(232, 2, 2, 0.8);
+  margin: 6px 0 0 0;
+}
+.main .container .info-set p {
+  -webkit-margin-before: 0px;
+  -webkit-margin-after: 0px;
+  -webkit-margin-start: 0px;
+  -webkit-margin-end: 0px;
 }
 .main .container .control-set {
   display: block;

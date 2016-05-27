@@ -102,6 +102,8 @@ io.on('connection', function(socket) {
 	    	    socket.emit('check_register', {
 		            isValid : isValid
 		        });
+
+                connection.close();
             });
         });
 	});
@@ -175,9 +177,9 @@ io.on('connection', function(socket) {
 				  
 				  var data = {
 					type: 'lottery',
-					event: person[random].id,
-					name: person[random].name,
-					phone: person[random].phone
+					event: person[random].id || 'NA',
+					name: person[random].name || 'NA',
+					phone: person[random].phone || 'NA'
 				  }
 				  
 				  try {
@@ -190,6 +192,9 @@ io.on('connection', function(socket) {
 							c.write(stringfyData + '\n');
 						});
 					}
+
+                    // contact control panel
+                    broadcast('award_content', data);
 
 				  } catch (e) {
 					console.log(e); 
@@ -205,7 +210,14 @@ io.on('connection', function(socket) {
                   });
 				  
 			  } else {
-				  console.log(err);    
+				console.log(err);    
+				var data = {
+			        type: 'lottery',
+					event: 'NA',
+					name: 'NA',
+					phone: 'NA'
+				}
+                broadcast('award_content', data);
 			  }
 		  });
 		
